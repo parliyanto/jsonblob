@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "buildCommand": "npm ci && npm rebuild react-scripts && chmod +x node_modules/.bin/react-scripts && CI=false npm run build",
+  "installCommand": "npm install",
+  "outputDirectory": "build",
+  "framework": "create-react-app",
+  "builds": [
+    { "src": "package.json", "use": "@vercel/static-build" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/index.html" }
+  ]
+}
