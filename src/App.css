@@ -1,0 +1,426 @@
+:root {
+  --code-bg: #282c34;
+  --code-gutter: #21252b;
+  --accent: #61dafb;
+  --text: #abb2bf;
+  --key: #61afef;
+  --value: #98c379;
+  --number: #d19a66;
+  --boolean: #e06c75;
+  --hover-bg: rgba(97, 175, 239, 0.15);
+}
+
+/* 🌌 GLOBAL BACKGROUND */
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  background: linear-gradient(180deg, #1b1f27 0%, #171a21 60%, #13151a 100%);
+  color: var(--text);
+}
+
+/* GRID LAYOUT */
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 1220px;
+  width: 100%;
+  margin: 40px auto;
+  height: calc(100vh - 100px);
+}
+
+/* ===================== */
+/* 🪟 PANEL BASE STYLE */
+/* ===================== */
+.editor-card {
+  border-radius: 18px 18px 6px 6px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.header-dark,
+.header-light {
+  padding: 12px 16px;
+  font-weight: 600;
+  font-size: 15px;
+  background: var(--code-gutter);
+  color: #f5f7fa;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* JSONEditor container */
+.jsoneditor-panel {
+  flex: 1;
+  height: 100%;
+}
+
+/* LEFT PANEL */
+.editor-card.dark {
+  background: var(--code-bg);
+  color: var(--text);
+}
+
+.editor-card.dark .ace_editor {
+  background: linear-gradient(180deg, #282c34 0%, #21252b 100%) !important;
+  color: var(--text) !important;
+}
+
+.editor-card.dark .ace_gutter {
+  background-color: var(--code-gutter) !important;
+  color: #5c6370 !important;
+}
+
+.editor-card.dark .ace_cursor {
+  color: #ffffff !important;
+}
+
+.editor-card.dark .ace_selection {
+  background: rgba(97, 175, 239, 0.25) !important;
+}
+
+/* RIGHT PANEL */
+.editor-card.light {
+  background: var(--code-bg);
+  color: var(--text);
+}
+
+/* Remove default borders */
+.jsoneditor {
+  border: none !important;
+}
+
+/* ============================= */
+/* ⚙️ JSONEDITOR ONE DARK */
+/* ============================= */
+
+div.jsoneditor-menu {
+  background: #2d3139 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #e6edf3 !important;
+  height: 38px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 6px !important;
+  padding: 0 6px !important;
+}
+
+div.jsoneditor-menu button {
+  background-color: transparent !important;
+  border: none !important;
+  opacity: 0.95 !important;
+  filter: brightness(2.4) saturate(1.3) contrast(1.3) !important;
+  transition: filter 0.25s ease, transform 0.15s ease !important;
+}
+div.jsoneditor-menu button:hover {
+  filter: brightness(3.2) saturate(1.6)
+    drop-shadow(0 0 4px rgba(97, 218, 251, 0.65)) !important;
+  transform: scale(1.05) !important;
+}
+
+div.jsoneditor-menu button::before {
+  content: none !important;
+}
+
+div.jsoneditor-menu button[disabled] {
+  opacity: 0.35 !important;
+  filter: grayscale(100%) brightness(0.8) !important;
+  cursor: not-allowed !important;
+}
+
+/* 🔍 Search box full dark */
+div.jsoneditor-menu div.jsoneditor-search {
+  background: #242831 !important;
+  border-radius: 6px !important;
+  padding: 2px 6px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+div.jsoneditor-menu div.jsoneditor-search input {
+  background: #2c313a !important;
+  color: #f3f5f8 !important;
+  border: 1px solid #3a3f4b !important;
+  border-radius: 4px !important;
+  padding: 4px 6px !important;
+  outline: none !important;
+  transition: all 0.2s ease-in-out !important;
+}
+div.jsoneditor-menu div.jsoneditor-search input:focus {
+  border-color: #61dafb !important;
+  background: #303642 !important;
+}
+div.jsoneditor-menu div.jsoneditor-search input::placeholder {
+  color: #a9b1bc !important;
+}
+
+/* 🌑 JSONEditor body (tree) */
+div.jsoneditor,
+div.jsoneditor-tree,
+div.jsoneditor-outer {
+  background-color: #282c34 !important;
+  color: #abb2bf !important;
+  font-size: 14px !important;
+}
+
+div.jsoneditor td.jsoneditor-selected {
+  background-color: rgba(97, 175, 239, 0.12) !important;
+  border-radius: 4px !important;
+}
+div.jsoneditor td.jsoneditor-selected:hover {
+  background-color: rgba(97, 175, 239, 0.22) !important;
+}
+
+div.jsoneditor-field { color: #61afef !important; }
+div.jsoneditor-value { color: #98c379 !important; }
+div.jsoneditor-value.jsoneditor-number { color: #d19a66 !important; }
+div.jsoneditor-value.jsoneditor-boolean { color: #e06c75 !important; }
+div.jsoneditor-value.jsoneditor-null { color: #c300ff !important; }
+
+div.jsoneditor td:hover {
+  background: rgba(97, 175, 239, 0.08) !important;
+}
+
+/* Hide watermark */
+.jsoneditor-poweredBy { display: none !important; }
+
+/* ============================= */
+/* 🌳 CUSTOM TOOLBAR BUTTONS */
+/* ============================= */
+
+.custom-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 6px 10px;
+  background: #2d3139;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.mode-btn {
+  background: #1e222a;
+  color: #e6edf3;
+  border: 1px solid #3a3f4b;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mode-btn:hover {
+  background: #2b313d;
+  border-color: #61dafb;
+  color: #61dafb;
+}
+
+.mode-btn.active {
+  background: #61dafb;
+  color: #0d1117;
+  font-weight: 600;
+  border-color: #61dafb;
+}
+
+/* ============================= */
+/* 📱 RESPONSIVE */
+/* ============================= */
+@media (max-width: 980px) {
+  .container {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .editor-card {
+    min-height: 50vh;
+  }
+}
+
+/* 🖱️ Search highlight result */
+.jsoneditor-highlight {
+  background: rgba(97,175,239,0.25) !important;
+  color: #fff !important;
+  border-radius: 3px !important;
+}
+
+
+/* 🌑 Custom Dark Dropdown for JSONEditor */
+.custom-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  background: #1e222a;
+  color: #e6edf3;
+  border: 1px solid #3a3f4b;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.dropdown-toggle:hover {
+  background: #2b313d;
+  border-color: #61dafb;
+  color: #61dafb;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  background: #1c2027;
+  border: 1px solid #3a3f4b;
+  border-radius: 6px;
+  padding: 4px;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.dropdown-menu.hidden {
+  display: none;
+}
+
+.dropdown-menu button {
+  background: transparent;
+  color: #e6edf3;
+  border: none;
+  padding: 5px 12px;
+  text-align: left;
+  font-size: 13px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease-in-out;
+}
+
+.dropdown-menu button:hover {
+  background: #2b313d;
+  color: #61dafb;
+}
+
+
+
+/* new */
+/* ============================= */
+/* 🔝 TOP NAVBAR STYLE */
+/* ============================= */
+.top-navbar {
+  background: #1c1f25;
+  color: #e6edf3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.burger-btn {
+  background: transparent;
+  color: #e6edf3;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.burger-btn:hover {
+  color: #61dafb;
+}
+
+.app-name {
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: 0.4px;
+  color: #61dafb;
+}
+
+/* === Right Buttons === */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-btn {
+  background: #1e222a;
+  color: #e6edf3;
+  border: 1px solid #3a3f4b;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.nav-btn:hover {
+  background: #2b313d;
+  border-color: #61dafb;
+  color: #61dafb;
+}
+
+.nav-btn.active {
+  background: #61dafb;
+  color: #0d1117;
+  font-weight: 600;
+  border-color: #61dafb;
+}
+
+/* Warning button */
+.nav-btn.warning {
+  background: #2b1d1d;
+  color: #e06c75;
+  border-color: #5c2a2a;
+}
+.nav-btn.warning:hover {
+  background: #451919;
+  color: #ff8b94;
+}
+
+/* Info button */
+.nav-btn.info {
+  background: #1e2b38;
+  color: #61afef;
+  border-color: #294562;
+}
+.nav-btn.info:hover {
+  background: #203547;
+  color: #61dafb;
+}
+
+
+/* ============================= */
+/* 🔝 LEFT-ALIGNED NAVBAR */
+/* ============================= */
+.top-navbar.left-aligned {
+  justify-content: flex-start;
+  gap: 14px;
+}
+
+.top-navbar.left-aligned .nav-actions {
+  margin-left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Tambahan warna tombol */
+.nav-btn.success {
+  background: #15391f;
+  color: #6ede94;
+  border-color: #2f6242;
+}
+.nav-btn.success:hover {
+  background: #1e462b;
+  color: #8fffb4;
+}
